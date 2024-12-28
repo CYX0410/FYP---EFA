@@ -34,7 +34,7 @@ export class RegisterPage {
       pinNumber: this.pinNumber
     };
 
-    this.http.post('http://localhost:3000/api/users/register', payload)
+    this.http.post('http://localhost:5010/api/users/register', payload)
       .subscribe({
         next: async (response: any) => {
           const toast = await this.toastCtrl.create({

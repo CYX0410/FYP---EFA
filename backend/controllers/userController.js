@@ -8,7 +8,7 @@ exports.registerUser = async (req, res) => {
   const { username, pinNumber, password } = req.body;
   try {
     // Check if user exists
-    const [existing] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+    const [existing] = await db.query('SELECT * FROM ecousers WHERE username = ?', [username]);
     if (existing.length > 0) {
       return res.status(400).json({ message: 'Username already exists' });
     }
@@ -18,7 +18,7 @@ exports.registerUser = async (req, res) => {
 
     // Insert user
     await db.query(
-      'INSERT INTO users (username, pinnumber, password) VALUES (?, ?, ?)',
+      'INSERT INTO ecousers (username, pinnumber, password) VALUES (?, ?, ?)',
       [username, pinNumber, hashedPassword]
     );
 
@@ -34,7 +34,7 @@ exports.loginUser = async (req, res) => {
   const { username, password } = req.body;
   try {
     // Find user
-    const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+    const [rows] = await db.query('SELECT * FROM ecousers WHERE username = ?', [username]);
     if (rows.length === 0) {
       return res.status(400).json({ message: 'User not found' });
     }
@@ -66,7 +66,7 @@ exports.forgotPassword = async (req, res) => {
   const { username, pinNumber, newPassword} = req.body;
   try {
     // Find user
-    const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+    const [rows] = await db.query('SELECT * FROM ecousers WHERE username = ?', [username]);
     if (rows.length === 0) {
       return res.status(400).json({ message: 'User not found' });
     }
@@ -82,7 +82,7 @@ exports.forgotPassword = async (req, res) => {
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
     // Update
-    await db.query('UPDATE users SET password = ? WHERE id = ?', [hashedNewPassword, user.id]);
+    await db.query('UPDATE ecousers SET password = ? WHERE id = ?', [hashedNewPassword, user.id]);
 
     return res.status(200).json({ message: 'Password reset successful' });
   } catch (err) {

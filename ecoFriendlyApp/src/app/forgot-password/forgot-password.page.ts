@@ -35,7 +35,7 @@ export class ForgotPasswordPage {
       newPassword: this.newPassword
     };
 
-    this.http.post('http://localhost:3000/api/users/forgot-password', payload)
+    this.http.post('http://localhost:5010/api/users/forgot-password', payload)
       .subscribe({
         next: async (response: any) => {
           const toast = await this.toastCtrl.create({
