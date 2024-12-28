@@ -1,0 +1,7 @@
+{
+  "name": "ecoFriendlyApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

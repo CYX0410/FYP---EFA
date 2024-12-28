@@ -1,0 +1,29 @@
+{
+  "name": "fyp---efa",
+  "version": "1.0.0",
+  "description": "EFA app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CYX0410/FYP---EFA.git"
+  },
+  "author": "Chong Yong Xuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CYX0410/FYP---EFA/issues"
+  },
+  "homepage": "https://github.com/CYX0410/FYP---EFA#readme",
+  "dependencies": {
+    "@angular/common": "^7.2.16",
+    "@angular/http": "^7.2.16",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0"
+  }
+}
