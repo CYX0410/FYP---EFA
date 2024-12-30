@@ -5,12 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPage } from './login/login.page';
 import { RegisterPage } from './register/register.page';
 import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
+import { HomePage } from './home/home.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPage },
   { path: 'register', component: RegisterPage },
   { path: 'forgot-password', component: ForgotPasswordPage },
+  { path: 'home', component: HomePage }
   // Other routes here...
 ];
 
