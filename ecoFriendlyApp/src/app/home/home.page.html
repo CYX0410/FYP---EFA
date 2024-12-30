@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Center the cards using a custom CSS class -->
+  <div class="center-cards">
+    <ion-card  color="success" button (click)="goToEcoTips()">
+      <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
+      <ion-card-header>
+        <ion-card-title>Eco-friendly Product Recommendation</ion-card-title>
+       
+      </ion-card-header>
+    </ion-card>
+    
+    
+
+    <!-- 2. Eco Tips & Insights -->
+    <ion-card color="tertiary" button (click)="goToEcoTips()">
+        <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
+        <ion-card-header>
+          <ion-card-title>Eco Tips and Insights</ion-card-title>
+       
+        </ion-card-header>
+      </ion-card>
+
+    <!-- 3. Eco Challenges & Reward -->
+    <ion-card color="secondary" button (click)="goToEcoChallenges()">
+      <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
+      <ion-card-header>
+        <ion-card-title>Eco Challenges and Reward</ion-card-title>
+   
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>
+

@@ -12,4 +12,12 @@ router.post('/login', userController.loginUser);
 // POST /api/users/forgot-password
 router.post('/forgot-password', userController.forgotPassword);
 
+router.get('/home', (req, res) => {
+    // If you want a simple text response:
+    // res.send("Welcome to the Home page from Node.js!");
+  
+    // Or return some data:
+    res.json({ message: "Hello from the Home route!" });
+  });
+
 module.exports = router;
