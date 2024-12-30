@@ -12,6 +12,8 @@ router.post('/login', userController.loginUser);
 // POST /api/users/forgot-password
 router.post('/forgot-password', userController.forgotPassword);
 
+router.post('/profile', userController.profile);
+
 router.get('/home', (req, res) => {
     // If you want a simple text response:
     // res.send("Welcome to the Home page from Node.js!");

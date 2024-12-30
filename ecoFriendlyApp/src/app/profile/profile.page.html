@@ -1,13 +1,57 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="profile.username"
+        name="username"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-input labelPlacement="floating" label="Email" placeholder="email@domain.com" type="email"
+        [(ngModel)]="profile.email"
+        name="email"
+        required
+        pattern="[a-zA-Z0-9._%+-]+@gmail\.com$">
+          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Bio</ion-label>
+      <ion-textarea
+        [(ngModel)]="profile.bio"
+        name="bio"
+        required
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Eco Preferences</ion-label>
+     <ion-textarea [(ngModel)]="profile.preferences" name="preferences" required></ion-textarea>
+    </ion-item>
+
+    <ion-button
+      type="submit"
+      expand="block"
+      [disabled]="!profileForm.valid"
+    >
+      Save Profile
+    </ion-button>
+  </form>
 </ion-content>
+
