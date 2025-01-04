@@ -102,7 +102,7 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.profile = async (req, res) => {
-  const { username, email, bio, preferences } = req.body;
+  const { userId, username, email, bio, preferences } = req.body; // Get userId from the request
 
   try {
     // Validate email format
@@ -111,29 +111,45 @@ exports.profile = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email format. Please use a Gmail address.' });
     }
 
-    // Convert preferences array to JSON for storage
-    const preferencesJSON = JSON.stringify(preferences);
+    // Check if the user exists by userId
+    const [user] = await db.query('SELECT * FROM ecousers WHERE id = ?', [userId]);
 
-    // Check if user already exists
-    const [user] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
-    
     if (user.length > 0) {
-      // Update existing user profile
+      // User exists, perform an update
       await db.query(
-        'UPDATE users SET email = ?, bio = ?, preferences = ? WHERE username = ?',
-        [email, bio, preferencesJSON, username]
+        'UPDATE ecousers SET username = ?, email = ?, bio = ?, preferences = ? WHERE id = ?',
+        [username, email, bio, preferences, userId]
       );
       return res.status(200).json({ message: 'Profile updated successfully.' });
     } else {
-      // Insert new user profile
-      await db.query(
-        'INSERT INTO users (username, email, bio, preferences) VALUES (?, ?, ?, ?)',
-        [username, email, bio, preferencesJSON]
-      );
-      return res.status(201).json({ message: 'Profile created successfully.' });
+      // User does not exist, return an error (optional)
+      return res.status(404).json({ message: 'User not found. Cannot update profile.' });
     }
   } catch (error) {
     console.error('Error updating profile:', error);
     return res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 };
+
+
+exports.getProfile = async (req, res) => {
+  const { userId } = req.query; // Pass the userId from the frontend request
+
+  try {
+    // Query the database to get user profile details
+    const [rows] = await db.query('SELECT username, email, bio, preferences FROM ecousers WHERE id = ?', [userId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const profile = rows[0];
+    return res.status(200).json(profile); // No need to parse preferences since it's a string
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
