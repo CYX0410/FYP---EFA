@@ -2,9 +2,7 @@
   <ion-toolbar>
     <ion-title>Profile</ion-title>
     <ion-buttons slot="end">
-      <!-- Toggle button: Changes text based on mode -->
       <ion-button (click)="onSubmit()">{{ isEditMode ? 'Save' : 'Edit' }}</ion-button>
-
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -13,42 +11,44 @@
   <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Username</ion-label>
-      <ion-input 
-        type="text" 
-        [value]="profile.username" 
-        [readonly]="!isEditMode">
+      <ion-input
+        type="text"
+        [(ngModel)]="profile.username"
+        [disabled]="!isEditMode"
+        name="username">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <ion-input 
-        type="email" 
-        [(ngModel)]="profile.email" 
-        [readonly]="!isEditMode" 
+      <ion-input
+        type="email"
+        [(ngModel)]="profile.email"
+        [disabled]="!isEditMode"
         name="email">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Bio</ion-label>
-      <ion-textarea 
-        [(ngModel)]="profile.bio" 
-        [readonly]="!isEditMode" 
+      <ion-textarea
+        [(ngModel)]="profile.bio"
+        [disabled]="!isEditMode"
         name="bio">
       </ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Preferences</ion-label>
-      <ion-input 
-        [(ngModel)]="profile.preferences" 
-        [readonly]="!isEditMode" 
+      <ion-textarea
+        [(ngModel)]="profile.preferences"
+        [disabled]="!isEditMode"
         name="preferences">
-      </ion-input>
+      </ion-textarea>
     </ion-item>
   </form>
 </ion-content>
+
 
 
 

@@ -35,6 +35,8 @@ export class LoginPage {
     this.http.post('http://localhost:5010/api/users/login', payload)
       .subscribe({
         next: async (response: any) => {
+          console.log('Login successful:', response);
+          localStorage.setItem('userId', response.userId);
           const toast = await this.toastCtrl.create({
             message: response.message,
             duration: 2000,

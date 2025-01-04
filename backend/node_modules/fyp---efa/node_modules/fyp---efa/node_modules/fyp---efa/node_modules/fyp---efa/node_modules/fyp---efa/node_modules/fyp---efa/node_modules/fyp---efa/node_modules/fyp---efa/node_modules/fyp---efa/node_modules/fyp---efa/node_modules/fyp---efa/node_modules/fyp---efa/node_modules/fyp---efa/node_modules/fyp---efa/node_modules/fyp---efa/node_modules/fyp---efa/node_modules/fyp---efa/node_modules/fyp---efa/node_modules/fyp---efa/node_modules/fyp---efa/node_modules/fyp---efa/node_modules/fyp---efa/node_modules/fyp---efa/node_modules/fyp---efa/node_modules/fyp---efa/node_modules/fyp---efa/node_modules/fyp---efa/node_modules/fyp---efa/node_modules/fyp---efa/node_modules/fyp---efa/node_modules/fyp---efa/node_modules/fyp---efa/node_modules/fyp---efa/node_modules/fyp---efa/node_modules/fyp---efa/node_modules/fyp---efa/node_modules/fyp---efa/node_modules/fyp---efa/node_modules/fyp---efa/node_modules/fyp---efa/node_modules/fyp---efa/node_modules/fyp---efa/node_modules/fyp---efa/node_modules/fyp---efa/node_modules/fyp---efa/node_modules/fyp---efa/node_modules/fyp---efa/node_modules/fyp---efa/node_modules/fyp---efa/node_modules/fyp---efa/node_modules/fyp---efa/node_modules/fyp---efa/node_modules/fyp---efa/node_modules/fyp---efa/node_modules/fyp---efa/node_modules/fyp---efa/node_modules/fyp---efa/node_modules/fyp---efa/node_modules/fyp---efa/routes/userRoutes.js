@@ -12,9 +12,8 @@ router.post('/login', userController.loginUser);
 // POST /api/users/forgot-password
 router.post('/forgot-password', userController.forgotPassword);
 
-router.post('/profile', userController.profile);
-
-router.get('/profile', userController.getProfile);
+router.get('/:id', userController.getProfile);
+router.put('/:id', userController.updateProfile);
 
 router.get('/home', (req, res) => {
     // If you want a simple text response:

@@ -8,4 +8,4 @@ const mySqlPool = mysql.createPool({
     database: 'eco_dataset'
 })
 
-module.exports = mySqlPool;
+module.exports = mySqlPool; ;

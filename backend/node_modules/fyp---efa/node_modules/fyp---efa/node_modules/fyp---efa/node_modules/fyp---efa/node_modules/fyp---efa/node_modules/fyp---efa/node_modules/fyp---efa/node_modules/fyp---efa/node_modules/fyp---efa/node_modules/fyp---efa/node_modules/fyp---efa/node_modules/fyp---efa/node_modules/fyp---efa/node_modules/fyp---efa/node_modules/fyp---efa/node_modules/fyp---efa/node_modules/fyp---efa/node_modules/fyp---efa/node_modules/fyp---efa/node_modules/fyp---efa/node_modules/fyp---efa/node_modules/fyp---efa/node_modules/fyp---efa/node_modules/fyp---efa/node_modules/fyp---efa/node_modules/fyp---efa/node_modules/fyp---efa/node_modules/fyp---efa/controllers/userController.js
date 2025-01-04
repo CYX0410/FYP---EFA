@@ -101,53 +101,40 @@ exports.forgotPassword = async (req, res) => {
   }
 };
 
-exports.profile = async (req, res) => {
-  const { userId, username, email, bio, preferences } = req.body; // Get userId from the request
-
-  try {
-    // Validate email format
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ message: 'Invalid email format. Please use a Gmail address.' });
-    }
-
-    // Check if the user exists by userId
-    const [user] = await db.query('SELECT * FROM ecousers WHERE id = ?', [userId]);
-
-    if (user.length > 0) {
-      // User exists, perform an update
-      await db.query(
-        'UPDATE ecousers SET username = ?, email = ?, bio = ?, preferences = ? WHERE id = ?',
-        [username, email, bio, preferences, userId]
-      );
-      return res.status(200).json({ message: 'Profile updated successfully.' });
-    } else {
-      // User does not exist, return an error (optional)
-      return res.status(404).json({ message: 'User not found. Cannot update profile.' });
-    }
-  } catch (error) {
-    console.error('Error updating profile:', error);
-    return res.status(500).json({ message: 'Server error. Please try again later.' });
-  }
-};
-
-
 exports.getProfile = async (req, res) => {
-  const { userId } = req.query; // Pass the userId from the frontend request
-
   try {
-    // Query the database to get user profile details
-    const [rows] = await db.query('SELECT username, email, bio, preferences FROM ecousers WHERE id = ?', [userId]);
-
+    console.log('GET request for user ID:', req.params.id); // Debugging log
+    const [rows] = await db.query(
+      'SELECT id, username, email, bio, preferences FROM ecousers WHERE id = ?',
+      [req.params.id]
+    );
     if (rows.length === 0) {
       return res.status(404).json({ message: 'User not found' });
     }
-
-    const profile = rows[0];
-    return res.status(200).json(profile); // No need to parse preferences since it's a string
+    res.json(rows[0]);
   } catch (error) {
-    console.error('Error fetching profile:', error);
-    return res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const { username, email, bio, preferences } = req.body;
+
+    const [result] = await db.query(
+      'UPDATE ecousers SET username = ?, email = ?, bio = ?, preferences = ? WHERE id = ?',
+      [username, email, bio, preferences, req.params.id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
