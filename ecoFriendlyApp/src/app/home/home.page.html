@@ -1,4 +1,4 @@
-<ion-content>
+<ion-app>
   <!-- Settings Menu -->
   <ion-menu contentId="main-content">
     <ion-header>
@@ -32,6 +32,7 @@
           <ion-label>Feedback</ion-label>
         </ion-item>
         
+        <!-- About EFA -->
         <ion-item button (click)="showAboutEFA()">
           <ion-icon slot="start" name="information-circle-outline"></ion-icon>
           <ion-label>About EFA</ion-label>
@@ -45,43 +46,63 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Home</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  </div>
-  <br>
-  <br>
-  <br>
-  <!-- Center the cards using a custom CSS class -->
-  <div class="center-cards">
-    <ion-card  color="success" button (click)="goToEcoTips()">
-      <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
-      <ion-card-header>
-        <ion-card-title>Eco-friendly Product Recommendation</ion-card-title>    
-      </ion-card-header>
-    </ion-card>
-    <!-- 2. Eco Tips & Insights -->
-    <ion-card color="tertiary" button (click)="goToEcoTips()">
+
+  <!-- Main Content -->
+  <ion-content id="main-content" [inert]="isDialogOpen">
+    <div class="ion-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Home</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- Centered Cards Section -->
+    <div class="center-cards">
+      <!-- 1. Eco-friendly Product Recommendation -->
+      <ion-card color="success" button (click)="goToEcoTips()">
+        <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
+        <ion-card-header>
+          <ion-card-title>Eco-friendly Product Recommendation</ion-card-title>    
+        </ion-card-header>
+      </ion-card>
+
+      <!-- 2. Eco Tips & Insights -->
+      <ion-card color="tertiary" button (click)="goToEcoTips()">
         <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
         <ion-card-header>
           <ion-card-title>Eco Tips and Insights</ion-card-title>
         </ion-card-header>
       </ion-card>
-    <!-- 3. Eco Challenges & Reward -->
-    <ion-card color="secondary" button (click)="goToEcoChallenges()">
-      <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
-      <ion-card-header>
-        <ion-card-title>Eco Challenges and Reward</ion-card-title>   
-      </ion-card-header>
-    </ion-card>
+
+      <!-- 3. Eco Challenges & Reward -->
+      <ion-card color="secondary" button (click)="goToEcoChallenges()">
+        <img src="assets/Images/images.jpg" alt="Eco-friendly Feature Image" />
+        <ion-card-header>
+          <ion-card-title>Eco Challenges and Reward</ion-card-title>   
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </ion-content>
+
+  <!-- Logout Confirmation Dialog -->
+  <div *ngIf="isDialogOpen" class="dialog-overlay">
+    <div class="dialog-box">
+      <h3>Confirm Logout</h3>
+      <p>Are you sure you want to log out?</p>
+      <div class="dialog-buttons">
+        <ion-button color="light" (click)="cancelLogout()">Cancel</ion-button>
+        <ion-button color="danger" (click)="confirmLogout()">Log Out</ion-button>
+      </div>
+    </div>
   </div>
-</ion-content>
+</ion-app>
+
 
 
 

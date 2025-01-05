@@ -8,6 +8,10 @@ import { ForgotPasswordPage } from './forgot-password/forgot-password.page';
 import { HomePage } from './home/home.page';
 import { ProfilePage } from './profile/profile.page';
 import { TrackingPage } from './tracking/tracking.page';
+import { EcoTipsPage } from './eco-tips/eco-tips.page';
+import { AboutEFAPage } from './about-efa/about-efa.page';
+import { EcoChallengesPage } from './eco-challenges/eco-challenges.page';
+import { EcoProductPage } from './eco-product/eco-product.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,6 +24,18 @@ const routes: Routes = [
   },
   {
     path: 'tracking', component: TrackingPage
+  },
+  {
+    path: 'eco-tips', component: EcoTipsPage
+  },
+  {
+    path: "about-efa", component: AboutEFAPage
+  },
+  {
+    path: "eco-challenges", component: EcoChallengesPage
+  },
+  {
+    path: "eco-product", component: EcoProductPage
   }
 
   // Other routes here...
